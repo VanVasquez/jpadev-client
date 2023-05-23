@@ -1,7 +1,14 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:1000/api/v1'
 
+let BASE_URL
+
+if(process.env.NODE_ENV === 'production') {
+  BASE_URL = 'https://jpadev-server-5nr9arf76-vanvasquez.vercel.app/api/v1'
+}
+else {
+  BASE_URL = 'http://localhost:1000/api/v1'
+}
 export default axios.create({
   baseURL: BASE_URL,
   headers: {
