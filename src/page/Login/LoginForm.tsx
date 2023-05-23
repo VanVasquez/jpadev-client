@@ -15,8 +15,8 @@ const LoginForm = (): React.JSX.Element => {
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
-    const {status} = await login(data)
-    if(status === 200)
+    // const {status} = await login(data)
+    // if(status === 200)
       navigate('/dashboard');
   };
 
