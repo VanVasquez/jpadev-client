@@ -12,7 +12,7 @@ const Dashboard = () => {
           </Card.Title>
           <Card.Text>
             <h2>The application is still on development</h2>
-            <p>the datas in here are mock data meaninng they are not real. they are for development purpose</p>
+            <p>the datas in here are mock data meaninng they are not real. they are for development purpose.</p>
           </Card.Text>
         </Card.Body>
       </Card>
