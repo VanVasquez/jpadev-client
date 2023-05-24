@@ -1,10 +1,15 @@
-import { Card } from "react-bootstrap"; 
+import { Button, Card } from "react-bootstrap"; 
+import useAuth from "../../hooks/useAuth"; 
+import useRefreshToken from "../../hooks/useRefreshToken";
 
 const Dashboard = () => { 
-
+  const refresh = useRefreshToken();
+  const {auth:{user}} = useAuth() 
 
   return (
-    <div>Dashboard 
+    <div>
+      <h3>ACCESS TOKEN: {user?.accessToken.slice(0, 4)}... {user?.accessToken.slice(user.accessToken.length-4)}</h3>
+      <Button onClick={() => refresh()}>Refresh</Button>
       <Card>
         <Card.Body>
           <Card.Title>

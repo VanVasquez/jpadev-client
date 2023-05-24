@@ -1,9 +1,10 @@
-import {useParams} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import cliendData from '../../../assets/mockdata/client.json'
 import { Button, Card } from 'react-bootstrap';
 import Units from './Units';
 import AddUnitModal from './AddUnitModal';
+import expandIcon from '../../../assets/expand.svg'
 
 interface Client {
   client_id: number;
@@ -19,7 +20,7 @@ const ClientsProfile = () => {
   const {client_id} = useParams();
   const [currentClient, setCurrentClient] = useState<Client>();
   const [showAddUnitModal, setShowAddUnitModal] = useState(false);
-
+  const navigate = useNavigate();
   const handleAddUnitModalOpen = () => { setShowAddUnitModal(true)};
   const handleAddUnitModalClose = () => { setShowAddUnitModal(false)};
 
@@ -37,21 +38,33 @@ const ClientsProfile = () => {
     <>
     <Card className='border-primary mb-3'>
       <Card.Body>
-        <Card.Title>{currentClient?.first_name} {currentClient?.last_name}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{currentClient?.type}</Card.Subtitle>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>
+            <Card.Title>{currentClient?.first_name} {currentClient?.last_name}</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">{currentClient?.type}</Card.Subtitle>
+          </div>
+          <div>
+            <Button variant="primary" onClick={handleAddUnitModalOpen} style={{ marginRight: '5px' }}>Add Unit</Button>
+            <Button variant="secondary" onClick={() => { navigate(`/clients/unit/${client_id}`) }}>
+              <img width='30' src={expandIcon} alt="Expand" />
+            </Button>
+
+          </div>
+        </div>
         <Card.Text>
           <p>Email: {currentClient?.email}</p>
           <p>Contact: {currentClient?.contact}</p>
           <p>Zip Code: {currentClient?.zip_code}</p>
         </Card.Text>
-        <Button onClick={handleAddUnitModalOpen}>Add unit</Button>
         <AddUnitModal open={showAddUnitModal} close={handleAddUnitModalClose}/>
       </Card.Body>
     </Card> 
     {client_id && (
       <Units client_id={parseInt(client_id)}/>
     )}
-    </>
+  </>
+  
+  
   )
 }
 
